@@ -1,6 +1,6 @@
 const {Kafka} =require("kafkajs");
 
-
+const topic_name=process.argv[2]|| "Logs2";
 createConsumer();
 
 async function createConsumer(){
@@ -19,7 +19,7 @@ try{
     await consumer.connect();
     console.log("Consumer Connected");
     await consumer.subscribe({
-        topic:"Logs1",
+        topic:topic_name,
         fromBeginning:true//Başlangıçtan başlıyor.
     })
     await consumer.run({

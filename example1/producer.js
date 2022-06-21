@@ -1,6 +1,7 @@
 const {Kafka} =require("kafkajs");
 
-
+const topic_name=process.argv[2]|| "Logs2";
+const _partition=process.argv[3]|| 0;
 createProducer();
 
 async function createProducer(){
@@ -17,10 +18,10 @@ try{
     await producer.connect();
     console.log("Producer Connected");
     const message_result=await producer.send({
-        topic:"Logs1",
+        topic:topic_name,
         messages:[{
             value:"Log message",
-            partition:0
+            partition:_partition
         }]
     })
 console.log("Message sent",JSON.stringify(message_result));
